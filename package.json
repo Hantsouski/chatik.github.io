@@ -13,7 +13,11 @@
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "eslint": "^8.43.0",
+    "pre-commit": "^1.2.2",
     "typescript": "^5.1.0",
     "vite": "^4.3.9"
-  }
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
