@@ -3,7 +3,7 @@ import TdClient, { TdObject, TdOptions } from 'tdweb';
 import { TelegramUpdates } from './telegram-updates';
 import TelegramAuth from './telegram-auth';
 
-export class Telegram {
+class Telegram {
   private tdClient: TdClient;
 
   private telegramUpdates: TelegramUpdates;
@@ -41,3 +41,5 @@ export class Telegram {
     return this.telegramUpdates;
   }
 }
+
+export default new Telegram();
