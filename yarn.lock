@@ -293,6 +293,16 @@
   resolved "https://registry.yarnpkg.com/@thi.ng/hex/-/hex-2.3.11.tgz#2da08c5c2bfd4eb62d27544870cf972090771555"
   integrity sha512-GFsrAIMybSlBRTFxlhMQQUe7LNk7Ry2ZKBJAlxtke0FoIAPLK7at2U4FvuQDG59wsa5sVrzsYMziJe3is8Do1Q==
 
+"@thi.ng/hiccup@^4.2.42":
+  version "4.2.42"
+  resolved "https://registry.yarnpkg.com/@thi.ng/hiccup/-/hiccup-4.2.42.tgz#aeb5ead7cc35643374e0f81b4bcbe108aeac5260"
+  integrity sha512-pMC78BwkInqkgBDScq/GgKf5piTfmvIlb7gowcFrpX16ZklorAdpV8VoH1zqR7tuT78NlD1MZ7YlCbMBXLzY2A==
+  dependencies:
+    "@thi.ng/api" "^8.8.2"
+    "@thi.ng/checks" "^3.3.14"
+    "@thi.ng/errors" "^2.2.17"
+    "@thi.ng/strings" "^3.4.7"
+
 "@thi.ng/logger@^1.4.15":
   version "1.4.15"
   resolved "https://registry.yarnpkg.com/@thi.ng/logger/-/logger-1.4.15.tgz#bae1974b4e52870233b218735c7f50d4e33f10bb"
@@ -305,6 +315,13 @@
   dependencies:
     "@thi.ng/api" "^8.8.2"
 
+"@thi.ng/memoize@^3.1.32":
+  version "3.1.32"
+  resolved "https://registry.yarnpkg.com/@thi.ng/memoize/-/memoize-3.1.32.tgz#ba93cd3d0b4a5f90d4f611b037eac536df619724"
+  integrity sha512-sjpeFTnadnG3yWXK/71GK9o+aLfKYALPW5LRJdiThlEyZ/ULNGV/5nJ2q7UOMizeV7WpOspRIDRPM/htBu4DEA==
+  dependencies:
+    "@thi.ng/api" "^8.8.2"
+
 "@thi.ng/paths@^5.1.38":
   version "5.1.38"
   resolved "https://registry.yarnpkg.com/@thi.ng/paths/-/paths-5.1.38.tgz#dfa74a0780583fd8dbf5d6c6254af82b5c97f946"
@@ -313,6 +330,11 @@
     "@thi.ng/api" "^8.8.2"
     "@thi.ng/checks" "^3.3.14"
     "@thi.ng/errors" "^2.2.17"
+
+"@thi.ng/prefixes@^2.1.24":
+  version "2.1.24"
+  resolved "https://registry.yarnpkg.com/@thi.ng/prefixes/-/prefixes-2.1.24.tgz#4e05a0756f3965b77f20b716688b0c8f0f30d216"
+  integrity sha512-/sMGANpLccScXwShgNuSLcYYgKNHgvt4khU+11VS657y1z0FHJ79wRRlLifDHBFDAeQXTAhljrvAF8ykLpGsHg==
 
 "@thi.ng/random@^3.4.2":
   version "3.4.2"
@@ -323,6 +345,20 @@
     "@thi.ng/checks" "^3.3.14"
     "@thi.ng/errors" "^2.2.17"
     "@thi.ng/hex" "^2.3.11"
+
+"@thi.ng/rdom@^0.11.4":
+  version "0.11.4"
+  resolved "https://registry.yarnpkg.com/@thi.ng/rdom/-/rdom-0.11.4.tgz#cc099a46b30c0f20f281d9a06d4c17e43662534e"
+  integrity sha512-av9WfmKZ9ssE7wLsWr2Di00GD5UDXnzAhPl9oeGETcQgq9cViI4KxO+oUeaY3FM3SLv/P5boFQtB4yi/v4CxjA==
+  dependencies:
+    "@thi.ng/api" "^8.8.2"
+    "@thi.ng/checks" "^3.3.14"
+    "@thi.ng/errors" "^2.2.17"
+    "@thi.ng/hiccup" "^4.2.42"
+    "@thi.ng/paths" "^5.1.38"
+    "@thi.ng/prefixes" "^2.1.24"
+    "@thi.ng/rstream" "^8.0.4"
+    "@thi.ng/strings" "^3.4.7"
 
 "@thi.ng/rstream@^8.0.4":
   version "8.0.4"
@@ -337,6 +373,16 @@
     "@thi.ng/errors" "^2.2.17"
     "@thi.ng/logger" "^1.4.15"
     "@thi.ng/transducers" "^8.4.6"
+
+"@thi.ng/strings@^3.4.7":
+  version "3.4.7"
+  resolved "https://registry.yarnpkg.com/@thi.ng/strings/-/strings-3.4.7.tgz#dd16fdac0849b2e31b4209c1851705f2a6ba4036"
+  integrity sha512-A/r6Lu1wbQmuNwxf/Xe64ByWo9QAkNv2reichRXq2PBa3YX23LONC/+VWmAwpEui1r7DrxxZzTG6bseafZc+hw==
+  dependencies:
+    "@thi.ng/api" "^8.8.2"
+    "@thi.ng/errors" "^2.2.17"
+    "@thi.ng/hex" "^2.3.11"
+    "@thi.ng/memoize" "^3.1.32"
 
 "@thi.ng/transducers@^8.4.6":
   version "8.4.6"
