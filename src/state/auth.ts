@@ -1,5 +1,5 @@
 import { fromView, syncRAF } from '@thi.ng/rstream';
-import { DB } from '.';
+import { DB } from './root';
 import { map } from '@thi.ng/transducers';
 import { AuthorizationStates } from './api';
 
@@ -9,6 +9,6 @@ export const auth = syncRAF(
   }),
 );
 
-export const authorized = auth.transform(
+export const isAuthorized = auth.transform(
   map(state => state === AuthorizationStates.Ready),
 );
