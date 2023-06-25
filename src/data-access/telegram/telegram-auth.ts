@@ -1,19 +1,26 @@
 import TdClient, { TdObject } from 'tdweb';
 import { TelegramUpdates } from './telegram-updates';
 import { Browser } from '../../common/browser';
+import { AllTelegramUpdates, AuthorizationStateUpdates } from './api';
 
 const browser = new Browser();
 
 export default class TelegramAuth {
+  private readonly authUpdates = new TelegramUpdates<AuthorizationStateUpdates>();
+
   constructor(
     private readonly tdClient: TdClient,
-    private readonly telegramUpdate: TelegramUpdates,
+    private readonly telegramUpdate: TelegramUpdates<AllTelegramUpdates>,
     private readonly apiKey: { id: string, hash: string }
   ) {
     this.telegramUpdate.on('updateAuthorizationState', (update) => {
       const authState = update['authorization_state'] as TdObject;
 
-      switch (authState['@type']) {
+      this.authUpdates.handleUpdate(authState);
+    });
+
+    this.authUpdates.on('any', update => {
+      switch (update['@type']) {
         case 'authorizationStateWaitEncryptionKey':
           this.tdClient.send({'@type': 'checkDatabaseEncryptionKey' })
           break;
@@ -66,7 +73,11 @@ export default class TelegramAuth {
         default:
           break;
       }
-    });
+    })
+  }
+
+  public updates(): TelegramUpdates<AuthorizationStateUpdates> {
+    return this.authUpdates;
   }
 
   public logOut() {
