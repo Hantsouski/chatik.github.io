@@ -2,26 +2,32 @@ import { TdObject } from 'tdweb';
 
 type UpdateHandler = (update: TdObject) => void;
 
-export class TelegramUpdates {
-  private updateHandlers: Map<string, Set<UpdateHandler>> = new Map();
+export class TelegramUpdates<Updates extends string> {
+  private subscribers: Map<string, Set<UpdateHandler>> = new Map();
 
   public handleUpdate(update: TdObject) {
-    if (!this.updateHandlers.has(update['@type'])) {
+    if (!this.subscribers.has(update['@type']) && !this.subscribers.has('any')) {
       return;
     }
 
-    const handlers = this.updateHandlers.get(update['@type']) || [];
+    const subscribers = this.subscribers.get(update['@type']) || [];
 
-    for (const fn of handlers) {
+    for (const fn of subscribers) {
+      fn(update);
+    }
+
+    const subscribersForAnyUpdates = this.subscribers.get('any') || [];
+
+    for (const fn of subscribersForAnyUpdates) {
       fn(update);
     }
   }
 
-  public on(event: string, fn: UpdateHandler) {
-    if (!this.updateHandlers.has(event)) {
-      this.updateHandlers.set(event, new Set([]));
+  public on(event: Updates, fn: UpdateHandler) {
+    if (!this.subscribers.has(event)) {
+      this.subscribers.set(event, new Set([]));
     }
 
-    this.updateHandlers.set(event, (this.updateHandlers.get(event) as Set<UpdateHandler>).add(fn));
+    this.subscribers.set(event, (this.subscribers.get(event) as Set<UpdateHandler>).add(fn));
   }
 }
