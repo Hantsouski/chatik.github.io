@@ -1,10 +1,14 @@
+import { authPage, chatikPage } from './pages';
+import { isAuthorized } from './state';
 import './style.css';
 
-import { $compile } from '@thi.ng/rdom';
+import { $compile, $replace } from '@thi.ng/rdom';
 
-const app = [
-  'h1', {}, 'Hello'
-]
+const app = isAuthorized.map(authorized => (
+  authorized
+    ? chatikPage
+    : authPage
+));
 
-$compile(app).mount(document.getElementById('app')!);
+$compile($replace(app)).mount(document.getElementById('app')!);
 
