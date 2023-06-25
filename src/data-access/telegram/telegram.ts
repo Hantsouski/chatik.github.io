@@ -2,11 +2,12 @@ import TdClient, { TdObject, TdOptions } from 'tdweb';
 
 import { TelegramUpdates } from './telegram-updates';
 import TelegramAuth from './telegram-auth';
+import { AllTelegramUpdates } from './api';
 
 class Telegram {
   private tdClient: TdClient;
 
-  private telegramUpdates: TelegramUpdates;
+  private telegramUpdates: TelegramUpdates<AllTelegramUpdates>;
   private telegramAuth: TelegramAuth;
 
   constructor() {
@@ -37,7 +38,7 @@ class Telegram {
     return this.telegramAuth;
   }
 
-  public updates(): TelegramUpdates {
+  public updates(): TelegramUpdates<AllTelegramUpdates> {
     return this.telegramUpdates;
   }
 }
