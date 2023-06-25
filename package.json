@@ -23,6 +23,7 @@
     "lint"
   ],
   "dependencies": {
+    "bowser": "^2.11.0",
     "tdweb": "^1.8.0"
   }
 }
