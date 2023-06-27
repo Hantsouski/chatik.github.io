@@ -54,11 +54,11 @@
   h1 {
     font-size: var(--size-step-4);
   }
-  
+
   h2 {
     font-size: var(--size-step-3);
   }
-  
+
   h3 {
     font-size: var(--size-step-2);
     line-height: calc(1ex / 0.38);
@@ -75,7 +75,7 @@
     font-size: var(--size-step-1);
     max-width: 50ch;
   }
-  
+
   a:not([class]) {
     color: currentColor;
     text-decoration-color: var(--accent--ui);
@@ -92,7 +92,7 @@
   :is(h1, h2, h3, blockquote) {
     --flow-space: 1.5em;
   }
-  
+
   :is(h1, h2, h3) + * {
     --flow-space: 0.5em;
   }
