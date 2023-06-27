@@ -35,7 +35,7 @@
     padding: 2em;
     font-family: Georgia, serif;
     font-size: var(--size-step-0);
-    line-height: 1.7;
+    line-height: calc(1ex / 0.32);
   }
 
   h1,
@@ -43,17 +43,15 @@
   h3 {
     font-family: Inter, sans-serif;
     font-weight: 800;
-    line-height: 1.1;
     text-wrap: balance;
   }
 
-  h2,
-  h3 {
-    max-width: 28ch;
+  h1,
+  h2 {
+    line-height: calc(1ex / 0.42);
   }
 
   h1 {
-    max-width: 20ch;
     font-size: var(--size-step-4);
   }
   
@@ -63,6 +61,7 @@
   
   h3 {
     font-size: var(--size-step-2);
+    line-height: calc(1ex / 0.38);
   }
 
   ul,
@@ -84,7 +83,8 @@
     text-underline-offset: 0.5ex;
   }
 
-  article {
+  article,
+  p {
     max-width: 65ch;
     margin-inline: auto;
   }
