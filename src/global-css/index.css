@@ -1,5 +1,7 @@
 @layer reset, theme, global, utilities, states;
 
+@import './reset.css' layer(reset);
+
 @layer theme {
   :root {
     /* Color styles */
