@@ -1,0 +1,101 @@
+@layer reset, theme, global, utilities, states;
+
+@layer theme {
+  :root {
+    /* Color styles */
+    --primary: oklch(22.09% 0.049 301.72);
+    --secondary: oklch(54.45% 0.024 316.48);
+    --tertiary: oklch(92.42% 0.009 299.13);
+    --light: oklch(98.82% 0.007 308.38);
+    --accent: oklch(91.05% 0.061 313.19);
+    --accent--alt: oklch(96.64% 0.02 314.09);
+    --accent--ui: oklch(68.39% 0.154 316.57);
+  }
+
+  html {
+    color-scheme: light;
+    accent-color: var(--accent--ui);
+    background: var(--light);
+    color: var(--primary);
+  }
+}
+
+@layer global {
+  :root {
+    --size-step-0: clamp(1rem, calc(0.96rem + 0.22vw), 1.13rem);
+    --size-step-1: clamp(1.25rem, calc(1.16rem + 0.43vw), 1.5rem);
+    --size-step-2: clamp(1.56rem, calc(1.41rem + 0.76vw), 2rem);
+    --size-step-3: clamp(1.95rem, calc(1.71rem + 1.24vw), 2.66rem);
+    --size-step-4: clamp(2.44rem, calc(2.05rem + 1.93vw), 3.55rem);
+  }
+
+  body {
+    padding: 2em;
+    font-family: Georgia, serif;
+    font-size: var(--size-step-0);
+    line-height: 1.7;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: Inter, sans-serif;
+    font-weight: 800;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  h2,
+  h3 {
+    max-width: 28ch;
+  }
+
+  h1 {
+    max-width: 20ch;
+    font-size: var(--size-step-4);
+  }
+  
+  h2 {
+    font-size: var(--size-step-3);
+  }
+  
+  h3 {
+    font-size: var(--size-step-2);
+  }
+
+  ul,
+  ol {
+    padding-inline-start: 1em;
+  }
+
+  blockquote {
+    padding-inline-start: 1em;
+    border-inline-start: 0.3em solid;
+    font-size: var(--size-step-1);
+    max-width: 50ch;
+  }
+  
+  a:not([class]) {
+    color: currentColor;
+    text-decoration-color: var(--accent--ui);
+    text-decoration-thickness: 0.5ex;
+    text-underline-offset: 0.5ex;
+  }
+
+  article {
+    max-width: 65ch;
+    margin-inline: auto;
+  }
+
+  .flow > * + * {
+    margin-block-start: var(--flow-space, 1em);
+  }
+  
+  :is(h1, h2, h3, blockquote) {
+    --flow-space: 1.5em;
+  }
+  
+  :is(h1, h2, h3) + * {
+    --flow-space: 0.5em;
+  }
+}

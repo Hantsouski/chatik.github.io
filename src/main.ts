@@ -1,6 +1,7 @@
 import { authPage, chatikPage } from './pages';
 import { isAuthorized } from './state';
-import './style.css';
+
+import './global-css/index.css';
 
 import { $compile, $replace } from '@thi.ng/rdom';
 
