@@ -334,6 +334,13 @@
   resolved "https://registry.yarnpkg.com/@thi.ng/hex/-/hex-2.3.11.tgz#2da08c5c2bfd4eb62d27544870cf972090771555"
   integrity sha512-GFsrAIMybSlBRTFxlhMQQUe7LNk7Ry2ZKBJAlxtke0FoIAPLK7at2U4FvuQDG59wsa5sVrzsYMziJe3is8Do1Q==
 
+"@thi.ng/hiccup-html@^2.2.16":
+  version "2.2.16"
+  resolved "https://registry.yarnpkg.com/@thi.ng/hiccup-html/-/hiccup-html-2.2.16.tgz#32a4b819f2f6a5d62efcd41e5a4ed97d227f7e53"
+  integrity sha512-O7pr4DrOXaQ8m1DqQBXsyAYuFVhqqnCIFAXy4qs9TLKgCmVBkCTpuXn9iQ6E7f3AGMKy41GfxcKXRU/43LrP6Q==
+  dependencies:
+    "@thi.ng/api" "^8.8.2"
+
 "@thi.ng/hiccup@^4.2.42":
   version "4.2.42"
   resolved "https://registry.yarnpkg.com/@thi.ng/hiccup/-/hiccup-4.2.42.tgz#aeb5ead7cc35643374e0f81b4bcbe108aeac5260"
@@ -878,9 +885,9 @@ doctrine@^3.0.0:
     esutils "^2.0.2"
 
 electron-to-chromium@^1.4.431:
-  version "1.4.441"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.441.tgz#94dd9c1cbf081d83f032a4f1cd9f787e21fc24ce"
-  integrity sha512-LlCgQ8zgYZPymf5H4aE9itwiIWH4YlCiv1HFLmmcBeFYi5E+3eaIFnjHzYtcFQbaKfAW+CqZ9pgxo33DZuoqPg==
+  version "1.4.442"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.442.tgz#455f4c5bd6ae73afb634dcffee6f356c26c8e294"
+  integrity sha512-RkrZF//Ya+0aJq2NM3OdisNh5ZodZq1rdXOS96G8DdDgpDKqKE81yTbbQ3F/4CKm1JBPsGu1Lp/akkna2xO06Q==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
