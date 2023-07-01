@@ -24,6 +24,19 @@ export type OptionUpdates = 'updateOption';
 export type MessagesUpdates = 'updateMessageInteractionInfo' | 'updateNewMessage';
 export type UserUpdates = 'updateUser';
 
+export interface CodeTypeTelegramMessage {
+  '@type': 'authenticationCodeTypeTelegramMessage',
+  length: number;
+}
+
+export interface CodeInfo {
+  '@type': 'authenticationCodeInfo',
+  phone_number: string;
+  timeout: number;
+  // can be other types
+  type: CodeTypeTelegramMessage;
+}
+
 export type AllTelegramUpdates =
   AuthorizationUpdates |
   ChatUpdates |
