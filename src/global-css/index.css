@@ -10,13 +10,13 @@
     --tertiary: oklch(92.42% 0.009 299.13);
     --light: oklch(98.82% 0.007 308.38);
     --accent: oklch(91.05% 0.061 313.19);
-    --accent--alt: oklch(96.64% 0.02 314.09);
-    --accent--ui: oklch(68.39% 0.154 316.57);
+    --accent-alt: oklch(96.64% 0.02 314.09);
+    --accent-ui: oklch(68.39% 0.154 316.57);
   }
 
   html {
     color-scheme: light;
-    accent-color: var(--accent--ui);
+    accent-color: var(--accent-ui);
     background: var(--light);
     color: var(--primary);
   }
@@ -78,7 +78,7 @@
 
   a:not([class]) {
     color: currentColor;
-    text-decoration-color: var(--accent--ui);
+    text-decoration-color: var(--accent-ui);
     text-decoration-thickness: 0.5ex;
     text-underline-offset: 0.5ex;
   }
