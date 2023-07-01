@@ -31,14 +31,14 @@ export default class TelegramAuth {
 
         case 'authorizationStateWaitOtherDeviceConfirmation':
           break;
-  
+
         case 'authorizationStateWaitPhoneNumber':
           // this.tdClient.send({
           //   '@type': 'requestQrCodeAuthentication',
           //   other_user_ids: []
           // });
           break;
-  
+
         case 'authorizationStateWaitTdlibParameters':
           this.tdClient.send({
             '@type': 'setTdlibParameters',
@@ -59,7 +59,7 @@ export default class TelegramAuth {
               files_directory: '/',
             },
           });
-      
+
           this.tdClient.send({
             '@type': 'setOption',
             name: 'use_quick_ack',
@@ -69,7 +69,7 @@ export default class TelegramAuth {
             },
           });
           break;
-      
+
         default:
           break;
       }
@@ -87,7 +87,7 @@ export default class TelegramAuth {
   public sendPhoneNumber(number: string): void {
       this.tdClient.send({'@type': 'setAuthenticationPhoneNumber', 'phone_number': number});
   }
-  
+
   public sendAuthCode(code: string): void {
       this.tdClient.send({'@type': 'checkAuthenticationCode', 'code': code});
   }
@@ -98,5 +98,9 @@ export default class TelegramAuth {
 
   public registerNewAccount(firstName: string, lastName: string): void {
       this.tdClient.send({'@type': 'registerUser', 'first_name': firstName, 'last_name': lastName });
+  }
+
+  public setPhone(): void {
+      this.tdClient.send({'@type': 'clientUpdateSetPhone' });
   }
 }
