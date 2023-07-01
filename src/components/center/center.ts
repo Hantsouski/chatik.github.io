@@ -21,6 +21,8 @@ interface CenterLOpts {
  * @property {boolean} andText=false Center align the text too (`text-align: center`)
  * @property {boolean} gutters=0 The minimum space on either side of the content
  * @property {boolean} intrinsic=false Center child elements based on their content width
+ *
+ * https://every-layout.dev/
  */
 export const centerL = (opts: Nullable<Opts>, ...body: unknown[]) => {
   const max = opts?.max || 'var(--measure)';
