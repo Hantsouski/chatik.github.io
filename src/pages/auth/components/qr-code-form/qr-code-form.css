@@ -1,0 +1,9 @@
+.qr-code-form {
+  & h1 {
+    font-size: var(--size-step-1);
+  }
+
+  & ol {
+    text-align: left;
+  }
+}

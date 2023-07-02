@@ -1,12 +1,11 @@
 import { $replace } from '@thi.ng/rdom';
-import { h2 } from '@thi.ng/hiccup-html';
 import { authState, AuthorizationStates } from '../../state';
 import { centerL } from '../../components';
-import { codeForm, phoneForm } from './components';
+import { codeForm, phoneForm, qrCodeForm } from './components';
 
 const pageLayout = (specificForm: unknown) => (
   centerL(
-    { max: '36ch', andText: true },
+    { max: '40ch', andText: true },
     specificForm,
   )
 );
@@ -17,7 +16,7 @@ const page = authState.map((state) => {
       return pageLayout(codeForm);
 
     case AuthorizationStates.WaitOtherDeviceConfirmation:
-      return h2(null, 'waiting other device confirmation');
+      return pageLayout(qrCodeForm);
 
     case AuthorizationStates.WaitPhoneNumber:
       return pageLayout(phoneForm);
