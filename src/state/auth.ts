@@ -39,7 +39,33 @@ export const qrCodeLink = syncRAF(
 export const yourPhoneNumber = authCodeInfo.transform<string>(pluck('phone_number'));
 export const requiredCodeLength = authCodeInfo.transform<number>(comp(pluck('type'), pluck('length')));
 
-authState.transform(trace('authState: '))
+authState.transform(trace('authState: '));
+
+authState.subscribe(({ next: state => {
+  /*
+    reloading is kinda bad :(
+    but it's required to reinstantiate tdlib properly
+    and it is what I described here: src/pages/auth/components/qr-code-form/qr-code-form.ts
+  */
+  if (state === AuthorizationStates.Closed) {
+    location.reload();
+  }
+
+  /*
+    quite often logging out state from tdlib can be hanging indefinetely
+    so setting a timeout is a workaround to reload the page properly
+    because if I reload the page in case of AuthorizationStates.LoggingOut and AuthorizationStates.Closed
+    then the tdlib won't reinitialise properly
+  */
+  if (state === AuthorizationStates.LoggingOut) {
+    setTimeout(() => {
+      // still logging out
+      if (authState.deref() === AuthorizationStates.LoggingOut) {
+        location.reload();
+      }
+    }, 1000);
+  }
+}}));
 
 export const isAuthorized = authState.transform(
   map(state => state === AuthorizationStates.Ready),
