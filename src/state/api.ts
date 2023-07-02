@@ -1,4 +1,4 @@
-import { AuthorizationStates, CodeInfo } from '../data-access/telegram/api';
+import { AuthorizationStates, Chat, CodeInfo } from '../data-access/telegram/api';
 
 export * from '../data-access/telegram/api';
 
@@ -12,4 +12,5 @@ export interface AppState {
     state: AuthorizationStates,
     meta?: Partial<AuthStateMeta>,
   };
+  chats: Chat[];
 }

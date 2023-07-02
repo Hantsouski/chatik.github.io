@@ -5,4 +5,5 @@ export const DB = defAtom<AppState>({
   auth: {
     state: AuthorizationStates.WaitTdlib,
   },
+  chats: [],
 });
