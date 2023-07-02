@@ -2,6 +2,7 @@ import { Nullable } from '@thi.ng/api';
 import type { Attribs } from '@thi.ng/hiccup-html';
 
 import './stack.css';
+import { Modify } from '../../common';
 
 type Opts = Partial<Attribs & StackLOpts>;
 
@@ -12,8 +13,6 @@ interface StackLOpts {
   recursive: boolean;
   splitAfter: string | null;
 }
-
-type Modify<T, R> = Omit<T, keyof R> & R;
 
 /**
  * @module stack-l
