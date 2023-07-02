@@ -22,8 +22,7 @@ isAuthorized
   .transform(filter(Boolean))
   .subscribe(metaStream(delayedStream(500)))
   .subscribe({ next: async () => {
-    const chats = await fetchChats();
-    setChats(chats);
+    setChats(await fetchChats());
 }});
 
 const setChats = (chats: Chat[]) => DB.resetIn(['chats'], chats);
