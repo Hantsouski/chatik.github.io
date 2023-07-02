@@ -4,11 +4,12 @@ export * from '../data-access/telegram/api';
 
 interface AuthStateMeta {
   code_info: CodeInfo;
+  link: string;
 }
 
 export interface AppState {
   auth: {
     state: AuthorizationStates,
-    meta?: AuthStateMeta,
+    meta?: Partial<AuthStateMeta>,
   };
 }
