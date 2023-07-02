@@ -197,6 +197,13 @@ export interface ChatTypeSupergroup extends TypedEntity<'chatTypeSupergroup'> {
   supergroup_id: number;
 }
 
+export interface ChatPhotoInfo extends TypedEntity<'chatPhotoInfo'> {
+  big: File;
+  has_animation: boolean;
+  minithumbnail: Minithumbnail;
+  small: File;
+}
+
 export interface Chat extends TypedEntity<'chat'> {
   id: number;
   last_message: Message;
@@ -207,4 +214,5 @@ export interface Chat extends TypedEntity<'chat'> {
   theme_name: string;
   unread_count: number;
   unread_mention_count: number;
+  photo?: ChatPhotoInfo;
 }
