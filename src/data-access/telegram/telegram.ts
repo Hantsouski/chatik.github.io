@@ -3,16 +3,18 @@ import TdClient, { TdObject, TdOptions } from 'tdweb';
 import { TelegramUpdates } from './telegram-updates';
 import TelegramAuth from './telegram-auth';
 import { AllTelegramUpdates } from './api';
+import { TelegramChats } from './telegram-chats';
 
 class Telegram {
   private tdClient: TdClient;
 
   private telegramUpdates: TelegramUpdates<AllTelegramUpdates>;
   private telegramAuth: TelegramAuth;
+  private telegramChats: TelegramChats;
 
   constructor() {
     this.telegramUpdates = new TelegramUpdates();
-  
+
     const options: TdOptions = {
       logVerbosityLevel: 1,
       jsLogVerbosityLevel: 'info',
@@ -32,10 +34,15 @@ class Telegram {
     };
 
     this.telegramAuth = new TelegramAuth(this.tdClient, this.telegramUpdates, apiKey);
+    this.telegramChats = new TelegramChats(this.tdClient);
   }
 
   public auth(): TelegramAuth {
     return this.telegramAuth;
+  }
+
+  public chats(): TelegramChats {
+    return this.telegramChats;
   }
 
   public updates(): TelegramUpdates<AllTelegramUpdates> {
