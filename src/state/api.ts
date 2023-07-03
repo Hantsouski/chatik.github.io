@@ -1,6 +1,7 @@
 import { AuthorizationStates, Chat, CodeInfo } from '../data-access/telegram/api';
 
 export * from '../data-access/telegram/api';
+export * from '../data-access/telegram/type-checks';
 
 interface AuthStateMeta {
   code_info: CodeInfo;
