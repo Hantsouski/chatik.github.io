@@ -144,6 +144,10 @@ export interface MessageText extends TypedEntity<'messageText'> {
   web_page: any;
 }
 
+export interface MessageChatAddMembers extends TypedEntity<'messageChatAddMembers'> {
+  member_user_ids: number[];
+}
+
 export interface MessageSenderChat extends TypedEntity<'messageSenderChat'> {
   chat_id: number;
 }
@@ -156,7 +160,7 @@ export interface Message extends TypedEntity<'message'> {
   id: number;
   chat_id: number;
   media_album_id: '0' | string;
-  content: MessagePhoto;
+  content: MessagePhoto | MessageText | MessageChatAddMembers;
   interaction_info: InteractionInfo;
   sender_id: MessageSenderChat | MessageSenderUser;
   date: number;
