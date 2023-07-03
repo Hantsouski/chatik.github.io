@@ -1,6 +1,13 @@
 import { div } from '@thi.ng/hiccup-html';
-import { abbreviatedName } from '../../common';
 
 import './circle.css';
 
-export const circle = (name: string | undefined) => div({ class: 'circle' }, abbreviatedName(name));
+interface CircleOpts {
+  name: string;
+  width: string;
+  height: string;
+  color: string;
+}
+
+export const circle = ({ name, width, height, color }: CircleOpts) =>
+  div({ class: 'circle', style: { width, height, 'background-color': color } }, name);
