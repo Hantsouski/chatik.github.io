@@ -20,10 +20,14 @@ export enum AuthorizationStates {
   LoggingOut = 'authorizationStateLoggingOut',
 }
 
+export type UpdateChatLastMessage = 'updateChatLastMessage';
+export type UpdateChatPosition = 'updateChatPosition';
+export type UpdateChatReadInbox = 'updateChatReadInbox';
+
 export type AnyUpdates = 'any';
 export type AuthorizationUpdates = 'updateAuthorizationState';
 export type AuthorizationStateUpdates = `${AuthorizationStates}` | AnyUpdates;
-export type ChatUpdates = 'updateChatLastMessage' | 'updateChatPosition';
+export type ChatUpdates = UpdateChatLastMessage | UpdateChatPosition | UpdateChatReadInbox;
 export type OptionUpdates = 'updateOption';
 export type MessagesUpdates = 'updateMessageInteractionInfo' | 'updateNewMessage';
 export type UserUpdates = 'updateUser';
