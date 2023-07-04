@@ -27,6 +27,7 @@ export type ChatUpdates = 'updateChatLastMessage' | 'updateChatPosition';
 export type OptionUpdates = 'updateOption';
 export type MessagesUpdates = 'updateMessageInteractionInfo' | 'updateNewMessage';
 export type UserUpdates = 'updateUser';
+export type FileUpdates = 'updateFile';
 
 export interface CodeTypeTelegramMessage extends TypedEntity<'authenticationCodeTypeTelegramMessage'> {
   length: number;
@@ -45,6 +46,7 @@ export type AllTelegramUpdates =
   OptionUpdates |
   MessagesUpdates |
   UserUpdates |
+  FileUpdates |
   AnyUpdates;
 
 export type TextEntityTypeBold = TypedEntity<'textEntityTypeBold'>;
