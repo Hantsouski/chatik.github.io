@@ -4,6 +4,7 @@ import { TelegramUpdates } from './telegram-updates';
 import TelegramAuth from './telegram-auth';
 import { AllTelegramUpdates } from './api';
 import { TelegramChats } from './telegram-chats';
+import { TelegramMedia } from './telegram-media';
 
 class Telegram {
   private tdClient: TdClient;
@@ -11,6 +12,7 @@ class Telegram {
   private telegramUpdates: TelegramUpdates<AllTelegramUpdates>;
   private telegramAuth: TelegramAuth;
   private telegramChats: TelegramChats;
+  private telegramMedia: TelegramMedia;
 
   constructor() {
     this.telegramUpdates = new TelegramUpdates();
@@ -35,6 +37,7 @@ class Telegram {
 
     this.telegramAuth = new TelegramAuth(this.tdClient, this.telegramUpdates, apiKey);
     this.telegramChats = new TelegramChats(this.tdClient);
+    this.telegramMedia = new TelegramMedia(this.tdClient, this.telegramUpdates);
   }
 
   public auth(): TelegramAuth {
@@ -43,6 +46,10 @@ class Telegram {
 
   public chats(): TelegramChats {
     return this.telegramChats;
+  }
+
+  public media(): TelegramMedia {
+    return this.telegramMedia;
   }
 
   public updates(): TelegramUpdates<AllTelegramUpdates> {
