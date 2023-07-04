@@ -3,11 +3,11 @@ import { div } from '@thi.ng/hiccup-html';
 import './circle.css';
 
 interface CircleOpts {
-  name: string;
+  body: any;
   width: string;
   height: string;
   color: string;
 }
 
-export const circle = ({ name, width, height, color }: CircleOpts) =>
-  div({ class: 'circle', style: { width, height, 'background-color': color } }, name);
+export const circle = ({ body, width, height, color }: CircleOpts) =>
+  div({ class: 'circle', style: { width, height, 'background-color': color } }, body);

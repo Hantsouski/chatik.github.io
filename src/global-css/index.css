@@ -111,4 +111,8 @@
     outline: 4px solid var(--accent-ui);
     outline-offset: 2px;
   }
+
+  .avatar {
+    border-radius: 50%;
+  }
 }

@@ -1,5 +1,5 @@
 import { h4, anchor, div, span } from '@thi.ng/hiccup-html';
-import { boxL, sideBarL, stackL, circle } from '../../../../components';
+import { boxL, sideBarL, stackL, circle, photo } from '../../../../components';
 import { Chat, isBasicGroup, isPhotoContent, isTextContent } from '../../../../state';
 import { abbreviatedName, croppedText, messageTime } from '../../../../common';
 
@@ -14,7 +14,13 @@ export const chat = (chat: Chat) => (
         {},
         div(
           { class: 'avatar-container' },
-          circle({ name: abbreviatedName(chat.title), width: '54px', height: '54px', color: 'orange' }),
+          chat.photo
+            ? photo(
+                { class: 'avatar', decoding: 'async', width: 54, height: 54 },
+                chat.photo.small,
+                avatarCircle(chat.title),
+              )
+            : avatarCircle(chat.title),
         ),
         stackL(
           {},
@@ -36,6 +42,8 @@ export const chat = (chat: Chat) => (
     ),
   )
 );
+
+const avatarCircle = (title: string) => circle({ body: abbreviatedName(title), width: '54px', height: '54px', color: 'orange' });
 
 const lastMessage = (chat: Chat) => {
   const message = chat.last_message;
@@ -60,5 +68,5 @@ const unreadCount = (chat: Chat) => {
     return null;
   }
 
-  return circle({ name: `${chat.unread_count}`, width: '30px', height: '30px', color: 'var(--accent-ui)' });
+  return circle({ body: `${chat.unread_count}`, width: '30px', height: '30px', color: 'var(--accent-ui)' });
 }
