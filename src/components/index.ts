@@ -5,3 +5,4 @@ export * from './note/note';
 export * from './box/box';
 export * from './sidebar/sidebar';
 export * from './circle/circle';
+export * from './photo/photo';
