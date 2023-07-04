@@ -36,7 +36,7 @@ class Telegram {
     };
 
     this.telegramAuth = new TelegramAuth(this.tdClient, this.telegramUpdates, apiKey);
-    this.telegramChats = new TelegramChats(this.tdClient);
+    this.telegramChats = new TelegramChats(this.tdClient, this.telegramUpdates);
     this.telegramMedia = new TelegramMedia(this.tdClient, this.telegramUpdates);
   }
 
