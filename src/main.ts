@@ -7,7 +7,7 @@ import { $compile, $replace } from '@thi.ng/rdom';
 
 const app = isAuthorized.map(authorized => (
   authorized
-    ? chatikPage
+    ? chatikPage()
     : authPage
 ));
 

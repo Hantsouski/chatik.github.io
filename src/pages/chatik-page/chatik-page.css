@@ -1,0 +1,21 @@
+.messages-container {
+  position: relative;
+}
+
+.page-container,
+.chatlist-container {
+  height: 100vh;
+}
+
+.page-container {
+  overflow: hidden;
+}
+
+.chatlist-container {
+  overflow-y: auto;
+}
+
+.chatlist-container,
+.messages-interior {
+  transition: .3s ease-in-out;
+}
