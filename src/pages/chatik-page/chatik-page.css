@@ -13,9 +13,15 @@
 
 .chatlist-container {
   overflow-y: auto;
+  background-color: var(--light);
+  z-index: 2;
 }
 
 .chatlist-container,
 .messages-interior {
   transition: .3s ease-in-out;
+}
+
+.messages-interior {
+  width: 100%;
 }

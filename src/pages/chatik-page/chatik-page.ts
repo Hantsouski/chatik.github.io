@@ -1,27 +1,17 @@
-import { div, h2 } from '@thi.ng/hiccup-html';
+import { div } from '@thi.ng/hiccup-html';
 import { distinct, filter, map } from '@thi.ng/transducers';
 import { Component, NumOrElement } from '@thi.ng/rdom';
 import { metaStream, reactive, sync } from '@thi.ng/rstream';
 
-import { chatList } from './components';
+import { chatContent, chatList } from './components';
 import { sideBarL } from '../../components';
-import { chatsLoaded } from '../../state/chats';
+import { chatsLoaded, selectedChatId } from '../../state';
 import { resizeObserver } from '../../common';
 
 import './chatik-page.css';
 
-const currentHash = reactive(location.hash || '');
-
 class ChatikPage extends Component {
   async mount(parent: Element, index?: NumOrElement): Promise<Element> {
-    /*
-    I don't unsubscribe from 'hashchange' since ChatikPage is the main component
-    which lives throught all app lifecycle, except when you need to relogin
-    */
-    window.addEventListener('hashchange', function() {
-      currentHash.next(location.hash);
-    });
-
     /*
       <div id="messages-container">
         <div id="messages-interior">
@@ -41,7 +31,7 @@ class ChatikPage extends Component {
             class: 'messages-interior',
             style: this.messagesInteriorStyles,
           },
-          h2({},  'Messages'),
+          chatContent,
         ),
       );
 
@@ -85,7 +75,7 @@ class ChatikPage extends Component {
           sync({
             src: {
               entries: resizeObserver(messagesContainer),
-              hash: currentHash,
+              selectedChatId,
               elements: reactive([messagesContainer, messagesInterior, chatList]),
             }
           })
@@ -96,8 +86,8 @@ class ChatikPage extends Component {
   private get messagesInteriorStyles() {
     return this.streamToRecalculateStyles
       .transform(
-        map(({ entries, hash, elements }) => {
-          const [ messagesContainer, messagesInterior, chatlistContainer ] = elements;
+        map(({ entries, selectedChatId, elements }) => {
+          const [ messagesContainer,, chatlistContainer ] = elements;
 
           const entry = entries[0];
 
@@ -105,16 +95,15 @@ class ChatikPage extends Component {
             return '';
           }
 
-          const { width } = messagesInterior.getBoundingClientRect();
           const { width: chatlistWidth } = chatlistContainer.getBoundingClientRect();
           const { top } = messagesContainer.getBoundingClientRect();
 
-          if (!hash && chatlistWidth === document.body.clientWidth) {
-            return `position: absolute; top: ${-top}px; right: -${width}px; transform: translateX(0);`;
+          if (!selectedChatId && chatlistWidth === document.body.clientWidth) {
+            return `position: absolute; top: ${-top}px; left: 0;`;
           }
 
           if (chatlistWidth === document.body.clientWidth) {
-            return `position: absolute; top: ${-top}px; right: -${width}px; transform: translateX(${-chatlistWidth}px);`;
+            return `position: absolute; top: ${-top}px; left: 0;`;
           }
 
           return '';
@@ -125,11 +114,11 @@ class ChatikPage extends Component {
   private get chatlistContainerStyles() {
     return this.streamToRecalculateStyles
       .transform(
-        map(({ hash, elements }) => {
+        map(({ selectedChatId, elements }) => {
           const [,,chatlistContainer] = elements;
           const { width } = chatlistContainer.getBoundingClientRect();
 
-          if (!hash && width === document.body.clientWidth) {
+          if (!selectedChatId && width === document.body.clientWidth) {
             return `transform: translateX(0);`
           }
 
