@@ -112,7 +112,7 @@
 
   :focus {
     outline: 4px solid var(--accent-ui);
-    outline-offset: 2px;
+    outline-offset: -4px;
   }
 
   .avatar {
