@@ -1,7 +1,8 @@
 import { CloseMode, fromView, metaStream, syncRAF } from '@thi.ng/rstream';
-import { DB, selectedChatId, isAuthorized, Message } from '.';
+import { DB, selectedChatId, isAuthorized, Message, isUserSender } from '.';
 import telegram from '../data-access/telegram/telegram';
-import { filter, trace } from '@thi.ng/transducers';
+import { comp, filter, map, partitionBy, trace } from '@thi.ng/transducers';
+import { uuid } from '../common';
 
 const telegramMessages = telegram.messages();
 
@@ -27,12 +28,52 @@ isAuthorized
       chat_id: selectedChatId,
     });
 
-    addMessages([lastMessage]);
-
     const restMessages = await telegramMessages.get({
       chat_id: selectedChatId,
       from_message_id: lastMessage.id,
     });
 
-    addMessages(restMessages);
+    addMessages([lastMessage, ...restMessages]);
 }}));
+
+const partitionByDay = (messages: Message[]) => {
+  return [
+    ...partitionBy(message => {
+        const date = new Date(message.date * 1000);
+
+        return `${date.getFullYear()}:${date.getMonth()}:${date.getDate()}`;
+    }, messages)
+  ];
+};
+
+const partitionBySender = (messages: Message[]) => {
+  return [
+    ...partitionBy(message => {
+      return isUserSender(message.sender_id) ? message.sender_id.user_id : message.sender_id.chat_id;
+    }, messages)
+  ];
+};
+
+const partitionByPhotoAlbum = (messages: Message[]) => {
+  const groupedByAlbums = [
+    ...partitionBy(message => {
+        return message.media_album_id !== '0' && !!message.media_album_id
+          ? message.media_album_id
+          : uuid();
+    }, messages)
+  ];
+
+  return groupedByAlbums.map(album => album.length > 1 ? album : album[0]);
+};
+
+export const groupedMessages = messages.transform(
+  comp(
+    filter(messages => !!messages.length),
+    map(partitionByDay),
+    map((days) => days.map(day => partitionBySender(day).map(partitionByPhotoAlbum))),
+  ),
+  {
+    id: 'groupedMessages',
+    closeOut: CloseMode.NEVER,
+  }
+);
