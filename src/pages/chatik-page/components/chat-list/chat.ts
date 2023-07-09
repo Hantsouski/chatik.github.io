@@ -9,7 +9,7 @@ export const chat = (chat: Chat) => (
   anchor(
     { class: 'chat', href: `./#${chat.id}` },
     boxL(
-      {},
+      { borderWidth: '0' },
       sideBarL(
         {},
         div(
