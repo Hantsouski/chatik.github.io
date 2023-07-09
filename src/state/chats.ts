@@ -20,6 +20,15 @@ export const chats = syncRAF(
   distinct<Chat[]>(),
 );
 
+export const chatsLoaded = chats.transform(
+  map(xs => xs.length > 0),
+  distinct<boolean>(),
+  {
+    id: 'chatsLoaded',
+    closeOut: CloseMode.NEVER,
+  },
+);
+
 chats.transform(trace('chats: '));
 
 isAuthorized
