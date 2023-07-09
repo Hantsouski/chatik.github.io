@@ -5,3 +5,4 @@ export * from './abbreviated-name';
 export * from './message-time';
 export * from './cropped-text';
 export * from './resize-observer';
+export * from './uuid';
