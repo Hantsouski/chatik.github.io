@@ -1,4 +1,4 @@
-import { Chat, ChatTypeBasicGroup, ChatUpdates, Message, MessagePhoto, MessageText } from './api';
+import { Chat, ChatTypeBasicGroup, ChatUpdates, Message, MessagePhoto, MessageSenderUser, MessageText } from './api';
 
 export const isBasicGroup = (chatType: Chat['type']): chatType is ChatTypeBasicGroup => {
   return chatType['@type'] === 'chatTypeBasicGroup';
@@ -18,4 +18,8 @@ export const isChatUpdates = (updateType: string): updateType is ChatUpdates => 
     updateType === 'updateChatPosition' ||
     updateType === 'updateChatReadInbox'
   );
-}
+};
+
+export const isUserSender = (sender: Message['sender_id']): sender is MessageSenderUser => {
+  return 'user_id' in sender;
+};
