@@ -6,4 +6,5 @@ export const DB = defAtom<AppState>({
     state: AuthorizationStates.WaitTdlib,
   },
   chats: [],
+  selectedChatId: location.hash.slice(1),
 });

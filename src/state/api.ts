@@ -14,4 +14,5 @@ export interface AppState {
     meta?: Partial<AuthStateMeta>,
   };
   chats: Chat[];
+  selectedChatId: string;
 }
