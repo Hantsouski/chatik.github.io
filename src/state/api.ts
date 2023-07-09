@@ -1,4 +1,4 @@
-import { AuthorizationStates, Chat, CodeInfo } from '../data-access/telegram/api';
+import { AuthorizationStates, Chat, CodeInfo, Message } from '../data-access/telegram/api';
 
 export * from '../data-access/telegram/api';
 export * from '../data-access/telegram/type-checks';
@@ -15,4 +15,5 @@ export interface AppState {
   };
   chats: Chat[];
   selectedChatId: string;
+  messages: Message[];
 }
