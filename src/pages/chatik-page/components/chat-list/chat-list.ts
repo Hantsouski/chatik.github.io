@@ -9,7 +9,7 @@ export const chatList = $klist(
   chats,
   // outer list element & attribs
   'div.chat-list',
-  { min: '36ch', role: 'list' },
+  { role: 'list' },
   // list item component constructor
   (x) => chat(x),
   // key function (includes)

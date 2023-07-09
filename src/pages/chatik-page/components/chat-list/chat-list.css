@@ -1,3 +1,4 @@
 .chat-list {
-  max-width: 40ch;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(32ch, 1fr));
 }
