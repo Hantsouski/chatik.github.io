@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@types/tdweb": "^1.4.2",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "autoprefixer": "^10.4.14",
@@ -38,6 +39,7 @@
     "@thi.ng/transducers": "^8.4.6",
     "bowser": "^2.11.0",
     "qr-code-styling": "^1.6.0-rc.1",
-    "tdweb": "^1.8.0"
+    "tdweb": "^1.8.0",
+    "uuid": "^9.0.0"
   }
 }
