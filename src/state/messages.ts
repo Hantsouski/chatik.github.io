@@ -1,10 +1,12 @@
 import { CloseMode, fromView, metaStream, syncRAF } from '@thi.ng/rstream';
 import { DB, selectedChatId, isAuthorized, Message, isUserSender } from '.';
 import telegram from '../data-access/telegram/telegram';
-import { comp, filter, map, partitionBy, trace } from '@thi.ng/transducers';
+import { comp, filter, map, partitionBy, sideEffect, trace } from '@thi.ng/transducers';
 import { uuid } from '../common';
 
 const telegramMessages = telegram.messages();
+
+selectedChatId.transform(sideEffect(() => clearMessages()));
 
 export const messages = syncRAF(
   fromView(DB, {
@@ -55,15 +57,13 @@ const partitionBySender = (messages: Message[]) => {
 };
 
 const partitionByPhotoAlbum = (messages: Message[]) => {
-  const groupedByAlbums = [
+  return [
     ...partitionBy(message => {
         return message.media_album_id !== '0' && !!message.media_album_id
           ? message.media_album_id
           : uuid();
     }, messages)
   ];
-
-  return groupedByAlbums.map(album => album.length > 1 ? album : album[0]);
 };
 
 export const groupedMessages = messages.transform(
@@ -71,9 +71,9 @@ export const groupedMessages = messages.transform(
     filter(messages => !!messages.length),
     map(partitionByDay),
     map((days) => days.map(day => partitionBySender(day).map(partitionByPhotoAlbum))),
-  ),
-  {
-    id: 'groupedMessages',
-    closeOut: CloseMode.NEVER,
-  }
+  )
 );
+
+const clearMessages = () => {
+  DB.resetIn(['messages'], []);
+};
