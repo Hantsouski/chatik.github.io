@@ -1,6 +1,6 @@
 import { h4, anchor, div, span } from '@thi.ng/hiccup-html';
 import { boxL, sideBarL, stackL, circle, photo } from '../../../../components';
-import { Chat, isBasicGroup, isPhotoContent, isTextContent } from '../../../../state';
+import { Chat, getUser, isBasicGroup, isPhotoContent, isTextContent } from '../../../../state';
 import { abbreviatedName, croppedText, messageTime } from '../../../../common';
 
 import './chat.css';
@@ -50,7 +50,7 @@ const lastMessage = (chat: Chat) => {
 
   if (isTextContent(message.content)) {
     return isBasicGroup(chat.type)
-      ? `Username: ${croppedText(message.content.text)}`
+      ? `${getUser('user_id' in message.sender_id ? message.sender_id.user_id : 0).first_name}: ${croppedText(message.content.text)}`
       : croppedText(message.content.text);
   }
 
