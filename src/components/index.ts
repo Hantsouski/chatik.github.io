@@ -8,3 +8,4 @@ export * from './circle/circle';
 export * from './photo/photo';
 export * from './grid/grid';
 export * from './switcher/switcher';
+export * from './bubble/bubble';
