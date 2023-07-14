@@ -214,6 +214,14 @@ export interface ChatPhotoInfo extends TypedEntity<'chatPhotoInfo'> {
   small: File;
 }
 
+export interface ProfilePhoto extends TypedEntity<'profilePhoto'> {
+  id: string;
+  big: File;
+  has_animation: boolean;
+  minithumbnail: Minithumbnail;
+  small: File;
+}
+
 export interface Chat extends TypedEntity<'chat'> {
   id: number;
   last_message: Message;
@@ -225,4 +233,25 @@ export interface Chat extends TypedEntity<'chat'> {
   unread_count: number;
   unread_mention_count: number;
   photo?: ChatPhotoInfo;
+}
+
+export type UserStatusRecently = TypedEntity<'userStatusRecently'>;
+export type UserStatusEmpty = TypedEntity<'userStatusEmpty'>;
+export interface UserStatusOffline extends TypedEntity<'userStatusOffline'> {
+  was_online: number;
+}
+export interface UserStatusOnline extends TypedEntity<'userStatusOnline'> {
+  expires: number;
+}
+export type UserTypeRegular = TypedEntity<'userTypeRegular'>;
+export type UserTypeDeleted = TypedEntity<'userTypeDeleted'>;
+export type UserTypeBot = TypedEntity<'userTypeBot'>;
+
+export interface User extends TypedEntity<'user'> {
+  id: number;
+  first_name: string;
+  last_name: string;
+  profile_photo: ProfilePhoto;
+  status: UserStatusRecently | UserStatusOffline | UserStatusOnline | UserStatusEmpty;
+  type: UserTypeRegular | UserTypeDeleted | UserTypeBot;
 }
