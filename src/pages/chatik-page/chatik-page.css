@@ -25,3 +25,8 @@
 .messages-interior {
   width: 100%;
 }
+
+days-l {
+  display: flex;
+  flex-direction: column-reverse;
+}

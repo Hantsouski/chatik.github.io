@@ -29,6 +29,7 @@ class ChatikPage extends Component {
           {
             id: 'messages-interior',
             class: 'messages-interior',
+            borderWidth: '0',
             style: this.messagesInteriorStyles,
           },
           chatContent,
@@ -41,7 +42,8 @@ class ChatikPage extends Component {
           {
             sideWidth: '27rem',
             contentMin: '50%',
-            class: 'page-container'
+            class: 'page-container',
+            space: '0'
           },
           div(
             {
