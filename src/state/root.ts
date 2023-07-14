@@ -8,4 +8,6 @@ export const DB = defAtom<AppState>({
   chats: [],
   selectedChatId: location.hash.slice(1),
   messages: [],
+  users: {},
+  me: null,
 });

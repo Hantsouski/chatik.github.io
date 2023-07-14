@@ -1,4 +1,5 @@
-import { AuthorizationStates, Chat, CodeInfo, Message } from '../data-access/telegram/api';
+import { IObjectOf, Nullable } from '@thi.ng/api';
+import { AuthorizationStates, Chat, CodeInfo, Message, User } from '../data-access/telegram/api';
 
 export * from '../data-access/telegram/api';
 export * from '../data-access/telegram/type-checks';
@@ -16,4 +17,6 @@ export interface AppState {
   chats: Chat[];
   selectedChatId: string;
   messages: Message[];
+  users: IObjectOf<User>;
+  me: Nullable<User>;
 }

@@ -5,3 +5,4 @@ export * from './files';
 export * from './chats';
 export * from './selected-chat-id';
 export * from './messages';
+export * from './users';
