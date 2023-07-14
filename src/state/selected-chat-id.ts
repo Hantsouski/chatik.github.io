@@ -1,6 +1,6 @@
 import { CloseMode, fromView, sync, syncRAF } from '@thi.ng/rstream';
 import { DB, chatsLoaded, chats } from '.';
-import { filter, map } from '@thi.ng/transducers';
+import { dedupe, filter, map } from '@thi.ng/transducers';
 
 export const selectedChatId = syncRAF(
   fromView(DB, {
@@ -26,6 +26,11 @@ export const selectedChat = sync({
 
     return chats.find(chat => chat.id === Number(selectedChatId));
   }),
+  dedupe(),
+  {
+    id: 'selectedChat',
+    closeOut: CloseMode.NEVER,
+  }
 );
 
 window.addEventListener('hashchange', function() {
