@@ -1,7 +1,7 @@
 import { CloseMode, fromView, metaStream, syncRAF } from '@thi.ng/rstream';
+import { comp, filter, map, partitionBy, sideEffect, trace } from '@thi.ng/transducers';
 import { DB, selectedChatId, isAuthorized, Message, isUserSender } from '.';
 import telegram from '../data-access/telegram/telegram';
-import { comp, filter, map, partitionBy, sideEffect, trace } from '@thi.ng/transducers';
 import { uuid } from '../common';
 
 const telegramMessages = telegram.messages();
@@ -73,6 +73,20 @@ export const groupedMessages = messages.transform(
     map((days) => days.map(day => partitionBySender(day).map(partitionByPhotoAlbum))),
   )
 );
+
+export const fetchMore = async () => {
+  const messagesDerefed = messages.deref()!;
+  const chatId = selectedChatId.deref()!;
+
+  const lastMessage = messagesDerefed[messagesDerefed.length - 1];
+
+  const newMessages = await telegramMessages.get({
+    chat_id: chatId,
+    from_message_id: lastMessage.id,
+  });
+
+  addMessages(messagesDerefed.concat(newMessages));
+};
 
 const clearMessages = () => {
   DB.resetIn(['messages'], []);
