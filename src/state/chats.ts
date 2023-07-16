@@ -1,7 +1,7 @@
 import { CloseMode, fromView, metaStream, syncRAF } from '@thi.ng/rstream';
 import { distinct, filter, map, trace } from '@thi.ng/transducers';
 import { beginTransaction } from '@thi.ng/atom';
-import { Chat, ChatPosition, DB, Message, isAuthorized } from '.';
+import { Chat, ChatPosition, ChatTypeSupergroup, DB, Message, isAuthorized } from '.';
 import telegram from '../data-access/telegram/telegram';
 import { delayedStream } from '../common';
 
@@ -87,4 +87,36 @@ telegramChats.updates.on('updateChatReadInbox', update => {
   }
 
   DB.resetIn(['chats', index, 'unread_count'], update.unread_count as number);
+});
+
+telegramChats.updates.on('updateBasicGroup', update => {
+  if ((update.basic_group as any).member_count === undefined) {
+    return;
+  }
+  const currentChats = chats.deref()!;
+
+  const index = currentChats.findIndex(chat => chat.id === (update.basic_group as any).id);
+
+  if (index === -1) {
+    return;
+  }
+
+  DB.resetIn(['chats', index, 'member_count'], (update.basic_group as any).member_count as number);
+});
+
+telegramChats.updates.on('updateSupergroupFullInfo', update => {
+  if ((update.supergroup_full_info as any).member_count === undefined) {
+    return;
+  }
+  const currentChats = chats.deref()!;
+
+  const index = currentChats.findIndex(chat =>
+    (chat.type as ChatTypeSupergroup).supergroup_id === update.supergroup_id);
+
+
+  if (index === -1) {
+    return;
+  }
+
+  DB.resetIn(['chats', index, 'member_count'], (update.supergroup_full_info as any).member_count as number);
 });
