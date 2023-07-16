@@ -1,5 +1,5 @@
-import { anchor, i, para, span, strong } from '@thi.ng/hiccup-html';
-import { Message, MessagePhoto, MessageText, TextEntity, TextEntityTypeTextUrl, isPhotoContent, isTextContent } from '../../../../state';
+import { anchor, div, i, para, span, strong } from '@thi.ng/hiccup-html';
+import { FormattedText, Message, MessagePhoto, TextEntity, TextEntityTypeTextUrl, isPhotoContent, isTextContent } from '../../../../state';
 import { boxL, photo } from '../../../../components';
 
 import './message.css';
@@ -12,11 +12,11 @@ export const message = (message: Message, opts?: Partial<MessageOpts>) => {
   const title = opts?.title || null;
 
   if (isTextContent(message.content)) {
-    return boxL({ borderWidth: '0', class: 'message' }, title, formattedText(message.content));
+    return boxL({ borderWidth: '0', class: 'message' }, title, formattedText(message.content.text));
   }
 
   if (isPhotoContent(message.content)) {
-    return photoContent(message.content);
+    return photoContent(message.content, title);
   }
 
   return boxL({ borderWidth: '0', class: 'message' }, title, para({}, 'Unsupported content'));
@@ -44,8 +44,8 @@ const enrichment = (entity: TextEntity) => {
   }
 };
 
-const formattedText = (messageText: MessageText) => {
-  const { entities, text } = messageText.text;
+const formattedText = (formattedText: FormattedText) => {
+  const { entities, text } = formattedText;
   if (!entities.length) {
     return para({}, text);
   }
@@ -93,9 +93,13 @@ const formattedText = (messageText: MessageText) => {
   return span({}, ...slices);
 };
 
-const photoContent = (messagePhoto: MessagePhoto) => {
-  return photo(
-    { decoding: 'async' },
-    messagePhoto.photo.sizes.find((size) => size.type === 'x')?.photo || messagePhoto.photo.sizes.find((size) => size.type === 'm')!.photo
+const photoContent = (messagePhoto: MessagePhoto, title?: any) => {
+  return div(
+    {},
+    photo(
+      { decoding: 'async' },
+      messagePhoto.photo.sizes.find((size) => size.type === 'x')?.photo || messagePhoto.photo.sizes.find((size) => size.type === 'm')!.photo
+    ),
+    boxL({ borderWidth: '0', class: 'message' }, title, formattedText(messagePhoto.caption))
   );
 };
