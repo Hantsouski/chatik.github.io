@@ -16,7 +16,7 @@ export const message = (message: Message, opts?: Partial<MessageOpts>) => {
   }
 
   if (isPhotoContent(message.content)) {
-    return photoContent(message.content, title);
+    return photoContent(message.content);
   }
 
   return boxL({ borderWidth: '0', class: 'message' }, title, para({}, 'Unsupported content'));
@@ -93,13 +93,13 @@ export const formattedText = (formattedText: FormattedText) => {
   return span({}, ...slices);
 };
 
-const photoContent = (messagePhoto: MessagePhoto, title?: any) => {
+const photoContent = (messagePhoto: MessagePhoto) => {
   return div(
     {},
     photo(
       { decoding: 'async' },
       messagePhoto.photo.sizes.find((size) => size.type === 'x')?.photo || messagePhoto.photo.sizes.find((size) => size.type === 'm')!.photo
     ),
-    boxL({ borderWidth: '0', class: 'message' }, title, formattedText(messagePhoto.caption))
+    boxL({ borderWidth: '0', class: 'message' }, formattedText(messagePhoto.caption))
   );
 };
