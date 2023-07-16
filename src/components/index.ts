@@ -9,3 +9,4 @@ export * from './photo/photo';
 export * from './grid/grid';
 export * from './switcher/switcher';
 export * from './bubble/bubble';
+export * from './avatar-circle/avatar-circle';

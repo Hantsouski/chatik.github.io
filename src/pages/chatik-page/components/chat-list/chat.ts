@@ -1,7 +1,7 @@
 import { h4, anchor, div, span } from '@thi.ng/hiccup-html';
-import { boxL, sideBarL, stackL, circle, photo } from '../../../../components';
+import { boxL, sideBarL, stackL, circle, photo, avatarCircle } from '../../../../components';
 import { Chat, getUser, isBasicGroup, isPhotoContent, isTextContent, selectedChatId } from '../../../../state';
-import { abbreviatedName, croppedText, messageTime } from '../../../../common';
+import { croppedText, messageTime } from '../../../../common';
 
 import './chat.css';
 
@@ -42,8 +42,6 @@ export const chat = (chat: Chat) => (
     ),
   )
 );
-
-const avatarCircle = (title: string) => circle({ body: abbreviatedName(title), width: '54px', height: '54px', color: 'orange' });
 
 const lastMessage = (chat: Chat) => {
   const message = chat.last_message;
