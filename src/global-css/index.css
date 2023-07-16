@@ -110,7 +110,8 @@
     margin-block-start: var(--flow-space, 1em);
   }
 
-  :focus {
+  :focus,
+  [active="true"] {
     outline: 4px solid var(--accent-ui);
     outline-offset: -4px;
   }
