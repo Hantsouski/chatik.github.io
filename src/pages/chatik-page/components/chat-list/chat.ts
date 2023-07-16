@@ -1,13 +1,13 @@
 import { h4, anchor, div, span } from '@thi.ng/hiccup-html';
 import { boxL, sideBarL, stackL, circle, photo } from '../../../../components';
-import { Chat, getUser, isBasicGroup, isPhotoContent, isTextContent } from '../../../../state';
+import { Chat, getUser, isBasicGroup, isPhotoContent, isTextContent, selectedChatId } from '../../../../state';
 import { abbreviatedName, croppedText, messageTime } from '../../../../common';
 
 import './chat.css';
 
 export const chat = (chat: Chat) => (
   anchor(
-    { class: 'chat', href: `./#${chat.id}` },
+    { class: 'chat', active: selectedChatId.map(id => id === `${chat.id}`), href: `./#${chat.id}` },
     boxL(
       { borderWidth: '0' },
       sideBarL(
