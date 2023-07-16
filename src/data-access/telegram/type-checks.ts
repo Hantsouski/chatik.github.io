@@ -16,7 +16,9 @@ export const isChatUpdates = (updateType: string): updateType is ChatUpdates => 
   return (
     updateType === 'updateChatLastMessage' ||
     updateType === 'updateChatPosition' ||
-    updateType === 'updateChatReadInbox'
+    updateType === 'updateChatReadInbox' ||
+    updateType === 'updateBasicGroup' ||
+    updateType === 'updateSupergroupFullInfo'
   );
 };
 
