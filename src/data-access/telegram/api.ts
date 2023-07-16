@@ -23,11 +23,13 @@ export enum AuthorizationStates {
 export type UpdateChatLastMessage = 'updateChatLastMessage';
 export type UpdateChatPosition = 'updateChatPosition';
 export type UpdateChatReadInbox = 'updateChatReadInbox';
+export type UpdateBasicGroup = 'updateBasicGroup';
+export type UpdateSuperGroupFullInfo = 'updateSupergroupFullInfo';
 
 export type AnyUpdates = 'any';
 export type AuthorizationUpdates = 'updateAuthorizationState';
 export type AuthorizationStateUpdates = `${AuthorizationStates}` | AnyUpdates;
-export type ChatUpdates = UpdateChatLastMessage | UpdateChatPosition | UpdateChatReadInbox;
+export type ChatUpdates = UpdateChatLastMessage | UpdateChatPosition | UpdateChatReadInbox | UpdateBasicGroup | UpdateSuperGroupFullInfo;
 export type OptionUpdates = 'updateOption';
 export type MessagesUpdates = 'updateMessageInteractionInfo' | 'updateNewMessage';
 export type UserUpdates = 'updateUser';
@@ -233,6 +235,7 @@ export interface Chat extends TypedEntity<'chat'> {
   unread_count: number;
   unread_mention_count: number;
   photo?: ChatPhotoInfo;
+  member_count?: number;
 }
 
 export type UserStatusRecently = TypedEntity<'userStatusRecently'>;
