@@ -16,7 +16,7 @@ export const superGroupChat = () => {
         ...groupedByDay.map(groupedBySender => {
 
           return stackL(
-            { space: '0.4rem', reverse: true },
+            { space: '1rem', reverse: true },
             ...groupedBySender.map((groupedByAlbum) => {
               if (groupedByAlbum.length > 1) {
                 return bubble({}, boxL({ borderWidth: '0' }, 'Album content'));
