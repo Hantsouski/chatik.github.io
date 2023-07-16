@@ -1,9 +1,10 @@
 import { $klist } from '@thi.ng/rdom';
 import { groupedMessages, isMe, isPhotoContent } from '../../../../state';
-import { boxL, stackL } from '../../../../components';
+import { stackL } from '../../../../components';
 import { bubble } from '../../../../components/bubble/bubble';
 import { message as messageC } from '../message/message';
 import { day } from '../day/day';
+import { albumMessage } from '../message/album-message';
 
 export const privateChat = () => {
   return $klist(
@@ -24,7 +25,7 @@ export const privateChat = () => {
             { space: '0.4rem', reverse: true, align },
             ...groupedBySender.map((groupedByAlbum, index) => {
               if (groupedByAlbum.length > 1) {
-                return bubble({}, boxL({ borderWidth: '0' }, 'Album content'));
+                return bubble({}, albumMessage(groupedByAlbum));
               }
 
               const [ message ] = groupedByAlbum;

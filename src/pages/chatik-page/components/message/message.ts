@@ -44,7 +44,7 @@ const enrichment = (entity: TextEntity) => {
   }
 };
 
-const formattedText = (formattedText: FormattedText) => {
+export const formattedText = (formattedText: FormattedText) => {
   const { entities, text } = formattedText;
   if (!entities.length) {
     return para({}, text);

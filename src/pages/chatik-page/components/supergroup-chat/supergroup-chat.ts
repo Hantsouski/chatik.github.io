@@ -1,9 +1,10 @@
 import { $klist } from '@thi.ng/rdom';
 import { groupedMessages } from '../../../../state';
-import { boxL, stackL } from '../../../../components';
+import { stackL } from '../../../../components';
 import { bubble } from '../../../../components/bubble/bubble';
 import { message as messageC } from '../message/message';
 import { day } from '../day/day';
+import { albumMessage } from '../message/album-message';
 
 export const superGroupChat = () => {
   return $klist(
@@ -19,7 +20,7 @@ export const superGroupChat = () => {
             { space: '1rem', reverse: true },
             ...groupedBySender.map((groupedByAlbum) => {
               if (groupedByAlbum.length > 1) {
-                return bubble({}, boxL({ borderWidth: '0' }, 'Album content'));
+                return bubble({}, albumMessage(groupedByAlbum));
               }
 
               const [ message ] = groupedByAlbum;

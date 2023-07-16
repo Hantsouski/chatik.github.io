@@ -1,10 +1,10 @@
 import { $klist } from '@thi.ng/rdom';
 import { h4 } from '@thi.ng/hiccup-html';
 import { getUser, groupedMessages, isMe, isPhotoContent } from '../../../../state';
-import { stackL, bubble, boxL } from '../../../../components';
+import { stackL, bubble, } from '../../../../components';
 import { message as messageC } from '../message/message';
-
 import { day } from '../day/day';
+import { albumMessage } from '../message/album-message';
 
 export const basicGroupChat = () => {
   return $klist(
@@ -25,7 +25,7 @@ export const basicGroupChat = () => {
             { space: '0.4rem', reverse: true, align },
             ...groupedBySender.map((groupedByAlbum, index) => {
               if (groupedByAlbum.length > 1) {
-                return bubble({}, boxL({ borderWidth: '0' }, 'Album content'));
+                return bubble({}, albumMessage(groupedByAlbum));
               }
 
               const [ message ] = groupedByAlbum;
