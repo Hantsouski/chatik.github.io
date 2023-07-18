@@ -1,6 +1,6 @@
 import { CloseMode, fromView, metaStream, syncRAF } from '@thi.ng/rstream';
-import { comp, filter, map, partitionBy, sideEffect, trace } from '@thi.ng/transducers';
-import { DB, selectedChatId, isAuthorized, Message, isUserSender } from '.';
+import { comp, filter, map, partitionBy, sideEffect } from '@thi.ng/transducers';
+import { DB, selectedChatId, isAuthorized, Message, isUserSender, FormattedText } from '.';
 import telegram from '../data-access/telegram/telegram';
 import { uuid } from '../common';
 
@@ -18,8 +18,6 @@ export const messages = syncRAF(
   }
 );
 
-messages.transform(trace('messages: '));
-
 const addMessages = (messages: Message[]) => DB.resetIn(['messages'], messages);
 
 isAuthorized
@@ -28,11 +26,13 @@ isAuthorized
   .subscribe(({ next: async (selectedChatId) => {
     const [ lastMessage ] = await telegramMessages.get({
       chat_id: selectedChatId,
+      limit: 50,
     });
 
     const restMessages = await telegramMessages.get({
       chat_id: selectedChatId,
       from_message_id: lastMessage.id,
+      limit: 50,
     });
 
     addMessages([lastMessage, ...restMessages]);
@@ -74,7 +74,7 @@ export const groupedMessages = messages.transform(
   )
 );
 
-export const fetchMore = async () => {
+export const fetchMore = async (limit = 50) => {
   const messagesDerefed = messages.deref()!;
   const chatId = selectedChatId.deref()!;
 
@@ -83,10 +83,30 @@ export const fetchMore = async () => {
   const newMessages = await telegramMessages.get({
     chat_id: chatId,
     from_message_id: lastMessage.id,
+    limit,
   });
 
   addMessages(messagesDerefed.concat(newMessages));
 };
+
+export const sendMessage = async (text: string) => {
+  const formattedText = {
+    '@type': 'formattedText',
+    text,
+    entities: []
+  } as FormattedText;
+
+  await telegramMessages.send({
+    chat_id: selectedChatId.deref()!,
+    formatted_text: formattedText,
+  });
+};
+
+telegramMessages.updates.on('updateNewMessage', update => {
+  const messagesDerefed = messages.deref()!;
+
+  addMessages([update.message as any as Message].concat(messagesDerefed));
+});
 
 const clearMessages = () => {
   DB.resetIn(['messages'], []);
