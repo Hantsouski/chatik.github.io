@@ -1,0 +1,8 @@
+.message-input {
+  width: 100%;
+  border: none;
+}
+
+.message-input-sidebar {
+  align-items: center !important;
+}
