@@ -1,6 +1,6 @@
 import { CloseMode, fromView, sync, syncRAF } from '@thi.ng/rstream';
-import { DB, chatsLoaded, chats } from '.';
-import { dedupe, filter, map } from '@thi.ng/transducers';
+import { DB, chats, Chat } from '.';
+import { comp, dedupe, filter, map } from '@thi.ng/transducers';
 
 export const selectedChatId = syncRAF(
   fromView(DB, {
@@ -14,23 +14,37 @@ export const selectedChatId = syncRAF(
 
 export const selectedChat = sync({
   src: {
-    chatsLoaded: chatsLoaded.transform(filter(Boolean)),
     selectedChatId,
     chats,
   }
 }).transform(
-  map(({ selectedChatId, chats }) => {
-    if (!selectedChatId) {
-      return null;
-    }
-
-    return chats.find(chat => chat.id === Number(selectedChatId));
-  }),
-  dedupe(),
+  comp(
+    filter(({ selectedChatId }) => !!selectedChatId),
+    map(({ selectedChatId, chats }) => (
+      chats.find(chat => chat.id === Number(selectedChatId))
+    )),
+    filter(chat => !!chat),
+  ),
   {
     id: 'selectedChat',
     closeOut: CloseMode.NEVER,
-  }
+  },
+);
+
+export const canSendMessages = selectedChat.transform(map(chat => chat?.permissions.can_send_messages), dedupe());
+
+export const selectedChatType = selectedChat.transform(
+  comp(
+    map(chat => chat!.type['@type']),
+    dedupe(),
+  ),
+);
+
+export const selectedChatTitleAndPhoto = selectedChat.transform(
+  comp(
+    map(chat => [chat?.title, chat?.photo] as [string, Chat['photo']]),
+    dedupe(([, photoA], [, photoB]) => photoA?.small.id === photoB?.small.id),
+  ),
 );
 
 window.addEventListener('hashchange', function() {
