@@ -103,7 +103,13 @@ export const sendMessage = async (text: string) => {
 };
 
 telegramMessages.updates.on('updateNewMessage', update => {
+  if (selectedChatId.deref()! !== `${(update.message as any as Message).chat_id}`) {
+    return;
+  }
+
   const messagesDerefed = messages.deref()!;
+
+  console.log('update', update);
 
   addMessages([update.message as any as Message].concat(messagesDerefed));
 });
