@@ -1,5 +1,5 @@
 import { CloseMode, fromView, metaStream, syncRAF } from '@thi.ng/rstream';
-import { distinct, filter, map, trace } from '@thi.ng/transducers';
+import { distinct, filter, map } from '@thi.ng/transducers';
 import { beginTransaction } from '@thi.ng/atom';
 import { Chat, ChatPosition, ChatTypeSupergroup, DB, Message, isAuthorized } from '.';
 import telegram from '../data-access/telegram/telegram';
@@ -28,8 +28,6 @@ export const chatsLoaded = chats.transform(
     closeOut: CloseMode.NEVER,
   },
 );
-
-chats.transform(trace('chats: '));
 
 isAuthorized
   .transform(filter(Boolean))
