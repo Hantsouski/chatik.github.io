@@ -10,11 +10,13 @@
   display: flex;
   flex-direction: column-reverse;
   overflow-y: auto;
+  height: 100%;
 }
 
-.messages-list-container {
+.messages-list-center-container {
   position: sticky;
   bottom: 0;
+  width: 100%;
 }
 
 .chat-header {
@@ -26,4 +28,8 @@
 
 #scrolled-to-top {
   min-height: 100px;
+}
+
+.messages-list-container {
+  position: relative;
 }
