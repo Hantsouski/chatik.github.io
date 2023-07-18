@@ -12,7 +12,7 @@ import './basicgroup-chat.css';
 export const basicGroupChat = () => {
   return $klist(
     groupedMessages,
-    'days-l',
+    'days-l.fade-in',
     { space: '1.5rem', reverse: true, role: 'list' },
     (groupedByDay) => (
       stackL(

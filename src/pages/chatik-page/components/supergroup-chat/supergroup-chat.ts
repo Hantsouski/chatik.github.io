@@ -9,7 +9,7 @@ import { albumMessage } from '../message/album-message';
 export const superGroupChat = () => {
   return $klist(
     groupedMessages,
-    'days-l',
+    'days-l.fade-in',
     { space: '1.5rem', reverse: true, role: 'list' },
     (groupedByDay) => (
       stackL(

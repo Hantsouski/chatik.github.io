@@ -7,7 +7,7 @@ import './chat.css';
 
 export const chat = (chat: Chat) => (
   anchor(
-    { class: 'chat', active: selectedChatId.map(id => id === `${chat.id}`), href: `./#${chat.id}` },
+    { class: 'chat fade-in', active: selectedChatId.map(id => id === `${chat.id}`), href: `./#${chat.id}` },
     boxL(
       { borderWidth: '0' },
       sideBarL(

@@ -18,7 +18,7 @@ export const chatContent = $replace(
     }
 
     return div(
-      { class: 'chat-content-container' },
+      { class: 'chat-content-container fade-in' },
       chatHeader(),
       new Messages(),
       div(
