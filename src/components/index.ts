@@ -11,3 +11,4 @@ export * from './switcher/switcher';
 export * from './bubble/bubble';
 export * from './avatar-circle/avatar-circle';
 export * from './autogrow-textarea/autogrow-textarea';
+export * from './frame/frame';
