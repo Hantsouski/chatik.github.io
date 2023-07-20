@@ -122,6 +122,6 @@ const photoContent = (messagePhoto: MessagePhoto) => {
         photoSize.photo,
       ),
     ),
-    boxL({ borderWidth: '0', class: 'message' }, formattedText(messagePhoto.caption))
+    messagePhoto.caption.text ? boxL({ borderWidth: '0', class: 'message' }, formattedText(messagePhoto.caption)) : ''
   );
 };
