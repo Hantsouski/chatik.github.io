@@ -1,4 +1,7 @@
 .chat-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(32ch, 1fr));
+
+  background-color: var(--current-background);
+  color: var(--current-foreground);
 }

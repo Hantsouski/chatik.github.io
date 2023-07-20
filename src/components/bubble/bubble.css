@@ -5,7 +5,8 @@
 }
 
 .bubble-interior {
-  background-color: var(--light);
+  background-color: var(--current-background);
+  color: var(--current-foreground);
 
   clip-path: inset(0 0 0 0 round 1.5rem);
 }

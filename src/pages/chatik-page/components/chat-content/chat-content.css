@@ -20,7 +20,8 @@
 }
 
 .chat-header {
-  background-color: var(--light);
+  background-color: var(--current-background);
+  color: var(--current-foreground);
   z-index: 10;
 
   box-shadow: oklch(0% 0 0 / 10%) 0px 0px 0px 1px;

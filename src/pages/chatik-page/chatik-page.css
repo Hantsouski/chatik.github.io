@@ -1,5 +1,8 @@
 .messages-container {
   position: relative;
+
+  background-color: var(--current-background);
+  color: var(--current-foreground);
 }
 
 .page-container,
@@ -13,7 +16,7 @@
 
 .chatlist-container {
   overflow-y: auto;
-  background-color: var(--light);
+  background-color: var(--current-background);
   z-index: 2;
 }
 

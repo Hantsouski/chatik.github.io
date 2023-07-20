@@ -8,8 +8,8 @@
   margin-top: var(--size-step-0);
   padding: 0 0.5rem;
   font-size: var(--size-step-0);
-  color: var(--light);
-  background-color: var(--primary);
+  background-color: var(--current-background);
+  color: var(--current-foreground);
   border-radius: var(--size-step-0);
-  opacity: 0.33;
+  opacity: 0.8;
 }

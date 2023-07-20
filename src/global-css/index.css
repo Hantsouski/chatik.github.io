@@ -12,17 +12,33 @@
     --accent: oklch(91.05% 0.061 313.19);
     --accent-alt: oklch(96.64% 0.02 314.09);
     --accent-ui: oklch(68.39% 0.154 316.57);
+
+    --dark-background: var(--primary);
+    --dark-foreground: var(--light);
+
+    --light-background: var(--light);
+    --light-foreground: var(--primary);
+
+    --current-background: var(--light-background);
+    --current-foreground: var(--light-foreground);
   }
 
   html {
     color-scheme: light;
     accent-color: var(--accent-ui);
-    background: var(--light);
-    color: var(--primary);
+    background: var(--current-background);
+    color: var(--current-foreground);
 
     /* not supported in all browsers
     it should remove layout shift after scrollbar shows up */
     overflow-y: overlay;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --current-background: var(--dark-background);
+      --current-foreground: var(--dark-foreground);
+    }
   }
 }
 
