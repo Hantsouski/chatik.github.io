@@ -1,6 +1,6 @@
 import { comp, filter, iterator, map } from '@thi.ng/transducers';
-import { boxL, gridL, photo } from '../../../../components';
-import { Message, MessagePhoto } from '../../../../state';
+import { boxL, frameL, gridL, photo } from '../../../../components';
+import { Message, MessagePhoto, messagePhotoSize } from '../../../../state';
 import { formattedText } from './message';
 import { div } from '@thi.ng/hiccup-html';
 
@@ -22,10 +22,22 @@ export const albumMessage = (messages: Message[]) => {
 };
 
 const photoContent = (messagePhoto: MessagePhoto) => {
-  return photo(
-    { decoding: 'async' },
-    messagePhoto.photo.sizes.find((size) => size.type === 'y')?.photo || messagePhoto.photo.sizes.find((size) => size.type === 'm')!.photo
-  );
+  const photoSize = messagePhotoSize(messagePhoto.photo.sizes);
+
+  if (!photoSize) {
+    return div(
+      {},
+    );
+  }
+
+  const ratio = `${Math.ceil((photoSize.width / photoSize.height) * 2)}:2`;
+
+  return frameL(
+    { ratio },
+    photo(
+      { decoding: 'async', width: photoSize.width, height: photoSize.height },
+      photoSize.photo
+    ));
 };
 
 const description = (message?: Message) => {

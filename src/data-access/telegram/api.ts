@@ -86,7 +86,7 @@ export interface Minithumbnail extends TypedEntity<'minithumbnail'> {
 
 export interface LocalFile extends TypedEntity<'localFile'> {
   is_downloading_active: boolean;
-  is_downloading_complete: boolean;
+  is_downloading_completed: boolean;
 }
 
 export interface RemoteFile extends TypedEntity<'remoteFile'> {
@@ -104,7 +104,7 @@ export interface File extends TypedEntity<'file'> {
   remote: RemoteFile;
 }
 
-export type PhotoSizeType = 'm' | 'x' | 's' | 'y' | 'w';
+export type PhotoSizeType = 'm' | 'x' | 's' | 'y' | 'w' | 'i';
 
 export interface PhotoSize extends TypedEntity<'photoSize'> {
   height: number;

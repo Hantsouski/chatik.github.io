@@ -31,13 +31,16 @@ export const selectedChat = sync({
   },
 );
 
-export const canSendMessages = selectedChat.transform(map(chat => chat?.permissions.can_send_messages), dedupe());
+export const canSendMessages = selectedChat.transform(map(chat => chat?.permissions.can_send_messages), dedupe(), { closeOut: CloseMode.NEVER });
 
 export const selectedChatType = selectedChat.transform(
   comp(
     map(chat => chat!.type['@type']),
     dedupe(),
   ),
+  {
+    closeOut: CloseMode.NEVER,
+  },
 );
 
 export const selectedChatTitleAndPhoto = selectedChat.transform(
@@ -45,6 +48,9 @@ export const selectedChatTitleAndPhoto = selectedChat.transform(
     map(chat => [chat?.title, chat?.photo] as [string, Chat['photo']]),
     dedupe(([, photoA], [, photoB]) => photoA?.small.id === photoB?.small.id),
   ),
+  {
+    closeOut: CloseMode.NEVER,
+  },
 );
 
 window.addEventListener('hashchange', function() {

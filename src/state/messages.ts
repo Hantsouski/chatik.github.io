@@ -1,6 +1,6 @@
 import { CloseMode, fromView, metaStream, syncRAF } from '@thi.ng/rstream';
 import { comp, filter, map, partitionBy, sideEffect } from '@thi.ng/transducers';
-import { DB, selectedChatId, isAuthorized, Message, isUserSender, FormattedText } from '.';
+import { DB, selectedChatId, isAuthorized, Message, isUserSender, FormattedText, PhotoSize } from '.';
 import telegram from '../data-access/telegram/telegram';
 import { uuid } from '../common';
 
@@ -109,11 +109,44 @@ telegramMessages.updates.on('updateNewMessage', update => {
 
   const messagesDerefed = messages.deref()!;
 
-  console.log('update', update);
-
   addMessages([update.message as any as Message].concat(messagesDerefed));
 });
 
 const clearMessages = () => {
   DB.resetIn(['messages'], []);
+};
+
+export const messagePhotoSize = (sizes: PhotoSize[], dimension = 600) => {
+  if (!sizes || !sizes.length) {
+    return null;
+  }
+
+  const iSize = sizes.find(size => size.type === 'i');
+  if (iSize) {
+    return iSize;
+  }
+
+  const useWidth = sizes[0].width >= sizes[0].height;
+  const diff = Math.abs(dimension - (useWidth ? sizes[0].width : sizes[0].height));
+
+  let index = 0;
+  for (const [currentIndex] of sizes.entries()) {
+    const nextIndex = currentIndex + 1;
+
+    if (!sizes[nextIndex]) {
+      break;
+    }
+
+    if (sizes[nextIndex].type === 'i' && !sizes[nextIndex].photo.local.is_downloading_completed) {
+      continue;
+    }
+
+    let currDiff = Math.abs(dimension - (useWidth ? sizes[nextIndex].width : sizes[nextIndex].height));
+    if (currDiff < diff) {
+      index = nextIndex;
+      currDiff = diff;
+    }
+  }
+
+  return sizes[index];
 };

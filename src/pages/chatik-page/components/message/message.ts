@@ -1,6 +1,15 @@
 import { anchor, div, i, para, span, strong } from '@thi.ng/hiccup-html';
-import { FormattedText, Message, MessagePhoto, TextEntity, TextEntityTypeTextUrl, isPhotoContent, isTextContent } from '../../../../state';
-import { boxL, photo } from '../../../../components';
+import {
+  FormattedText,
+  Message,
+  MessagePhoto,
+  TextEntity,
+  TextEntityTypeTextUrl,
+  isPhotoContent,
+  isTextContent,
+  messagePhotoSize,
+} from '../../../../state';
+import { boxL, frameL, photo } from '../../../../components';
 
 import './message.css';
 
@@ -37,7 +46,7 @@ const enrichment = (entity: TextEntity) => {
       return (text: string) => anchor({ href: text }, text);
 
     case 'textEntityTypeHashtag':
-      return (text: string) => anchor({ href: 'hash'}, text);
+      return (text: string) => anchor({ href: 'hash' }, text);
 
     default:
       return (text: string) => span({}, text);
@@ -94,11 +103,24 @@ export const formattedText = (formattedText: FormattedText) => {
 };
 
 const photoContent = (messagePhoto: MessagePhoto) => {
+  const photoSize = messagePhotoSize(messagePhoto.photo.sizes);
+
+  if (!photoSize) {
+    return div(
+      {},
+    );
+  }
+
+  const ratio = `${Math.ceil((photoSize.width / photoSize.height) * 2)}:2`;
+
   return div(
     {},
-    photo(
-      { decoding: 'async' },
-      messagePhoto.photo.sizes.find((size) => size.type === 'x')?.photo || messagePhoto.photo.sizes.find((size) => size.type === 'm')!.photo
+    frameL(
+      { ratio },
+      photo(
+        { decoding: 'async', width: photoSize.width, height: photoSize.height },
+        photoSize.photo,
+      ),
     ),
     boxL({ borderWidth: '0', class: 'message' }, formattedText(messagePhoto.caption))
   );
