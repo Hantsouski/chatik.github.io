@@ -43,7 +43,7 @@ authState.transform(trace('authState: '));
 
 authState.subscribe(({ next: state => {
   /*
-    reloading is kinda bad :(
+    reloading is bad :(
     but it's required to reinstantiate tdlib properly
     and it is what I described here: src/pages/auth/components/qr-code-form/qr-code-form.ts
   */
@@ -52,7 +52,7 @@ authState.subscribe(({ next: state => {
   }
 
   /*
-    quite often logging out state from tdlib can be hanging indefinetely
+    quite often logged out state from tdlib can hang indefinetely
     so setting a timeout is a workaround to reload the page properly
     because if I reload the page in case of AuthorizationStates.LoggingOut and AuthorizationStates.Closed
     then the tdlib won't reinitialise properly
@@ -114,4 +114,6 @@ telegramAuth.updates().on('any', update => {
   }
 
   setAuthState(update['@type'] as AuthorizationStates);
-})
+});
+
+window.addEventListener('log out', () => logOut());
