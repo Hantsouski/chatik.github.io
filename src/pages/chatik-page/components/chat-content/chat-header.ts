@@ -1,4 +1,4 @@
-import { h4, header, span } from '@thi.ng/hiccup-html';
+import { h4, header } from '@thi.ng/hiccup-html';
 import { avatarCircle, boxL, photo, sideBarL, stackL } from '../../../../components';
 import { selectedChatTitleAndPhoto } from '../../../../state';
 import { $replace } from '@thi.ng/rdom';

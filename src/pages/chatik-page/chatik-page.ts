@@ -1,4 +1,4 @@
-import { button, div, header } from '@thi.ng/hiccup-html';
+import { div, header } from '@thi.ng/hiccup-html';
 import { distinct, filter, map } from '@thi.ng/transducers';
 import { Component, NumOrElement } from '@thi.ng/rdom';
 import { metaStream, reactive, sync } from '@thi.ng/rstream';
