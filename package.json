@@ -38,6 +38,7 @@
     "@thi.ng/rstream": "^8.0.4",
     "@thi.ng/transducers": "^8.4.6",
     "bowser": "^2.11.0",
+    "inclusive-menu-button": "^0.1.4",
     "qr-code-styling": "^1.6.0-rc.1",
     "tdweb": "^1.8.0",
     "uuid": "^9.0.0"
