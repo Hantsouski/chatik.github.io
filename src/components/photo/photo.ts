@@ -8,8 +8,8 @@ export const photo = (attribs: Partial<ImageAttribs>, file: File, whileLoading?:
 
   return $refresh(
     src,
-    async src => img({ ...attribs, src }),
+    async src => img({ ...attribs, src, loading: 'lazy' }),
     async () => whileLoading || '',
     async () => whileLoading || img({ ...attribs }),
   );
-}
+};
