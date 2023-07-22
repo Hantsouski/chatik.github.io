@@ -33,3 +33,7 @@ days-l {
   display: flex;
   flex-direction: column-reverse;
 }
+
+.chatlist-header {
+  background-color: var(--current-background);
+}

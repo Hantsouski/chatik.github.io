@@ -1,10 +1,10 @@
-import { div } from '@thi.ng/hiccup-html';
+import { button, div, header } from '@thi.ng/hiccup-html';
 import { distinct, filter, map } from '@thi.ng/transducers';
 import { Component, NumOrElement } from '@thi.ng/rdom';
 import { metaStream, reactive, sync } from '@thi.ng/rstream';
 
 import { chatContent, chatList } from './components';
-import { sideBarL } from '../../components';
+import { SettingsMenu, boxL, sideBarL } from '../../components';
 import { chatsLoaded, selectedChatId } from '../../state';
 import { resizeObserver } from '../../common';
 
@@ -51,6 +51,10 @@ class ChatikPage extends Component {
               class: 'chatlist-container',
               style: this.chatlistContainerStyles,
             },
+            header(
+              { class: 'chatlist-header' },
+              boxL({ borderWidth: '0', padding: 'calc(var(--size-step-0) / 2) var(--size-step-0)' }, new SettingsMenu()),
+            ),
             chatList,
           ),
           messageList,
