@@ -34,7 +34,7 @@ export class SettingsMenu extends Component {
     );
 
     const openButton = document.querySelector('[data-inclusive-menu-opens]');
-    const settingsMenuButton = new MenuButton(openButton);
+    const settingsMenuButton = MenuButton.default ? new MenuButton.default(openButton) : new MenuButton(openButton);
 
     // Listen to choose event
     settingsMenuButton.on('choose', () => {
