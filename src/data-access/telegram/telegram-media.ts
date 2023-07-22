@@ -9,11 +9,6 @@ export class TelegramMedia {
     private readonly tdClient: TdClient,
     private readonly telegramUpdate: TelegramUpdates<AllTelegramUpdates>,
   ) {
-    const request = window.indexedDB.open('tdlib-dev');
-    request.onsuccess = () => {
-      request.result.transaction(['keyvaluepairs'], 'readonly').objectStore('keyvaluepairs');
-    };
-
     this.telegramUpdate.on('updateFile', async (update) => {
       if (!update) {
         return;

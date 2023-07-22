@@ -25,7 +25,7 @@ class Telegram {
       logVerbosityLevel: 1,
       jsLogVerbosityLevel: 'info',
       mode: 'wasm', // 'wasm-streaming', 'wasm', 'asmjs'
-      instanceName: 'tdlib-dev',
+      // instanceName: 'tdlib-dev',
       readOnly: false,
       isBackground: false,
       useDatabase: true,
