@@ -1,0 +1,30 @@
+.autocomplete {
+  position: relative;
+  text-align: center;
+}
+
+.autocomplete [role=listbox] {
+  position: absolute;
+  max-height: 12em;
+  top: 3.5rem;
+  right: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  background-color: var(--current-background);
+}
+
+.autocomplete [role=option][aria-selected="true"] {
+  background-color: var(--accent-ui);
+  border-color: var(--accent-ui);
+  outline-offset: 0px;
+  color: var(--light);
+}
+
+.autocomplete [role="option"] {
+  & > * {
+    display: flex;
+    justify-content: space-between;
+  }
+}
