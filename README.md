@@ -1,6 +1,6 @@
 # chatik.github.io
 
-This is a pet project to explore and touch more of incredible work of [Karsten Schmidt](https://github.com/postspectacular). https://github.com/thi-ng/umbrella. 
+This is a pet project to explore and touch more of incredible work of [Karsten Schmidt](https://github.com/postspectacular). https://github.com/thi-ng/umbrella. This is a telegram web application, but with not a lot of features.
 
 The project is still in progress, so there are some known issues:
   * If you open a channel and there are some new photos, those photos won't be displayed, you'll have to reload the page and you should see them.
