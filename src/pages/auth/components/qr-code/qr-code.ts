@@ -7,7 +7,7 @@ export class QrCode extends Component {
   async mount(parent: Element, index?: NumOrElement) {
     const el = this.$el(
       'div#qr-container',
-      {},
+      { style: 'text-align: center '},
       'Loading...',
       parent,
       index

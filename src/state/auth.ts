@@ -1,4 +1,4 @@
-import { CloseMode, fromView, syncRAF } from '@thi.ng/rstream';
+import { CloseMode, fromPromise, fromView, syncRAF } from '@thi.ng/rstream';
 import { DB } from './root';
 import { comp, distinct, filter, map, pluck, trace } from '@thi.ng/transducers';
 import { AuthorizationStates, CodeInfo } from './api';
@@ -38,6 +38,7 @@ export const qrCodeLink = syncRAF(
 
 export const yourPhoneNumber = authCodeInfo.transform<string>(pluck('phone_number'));
 export const requiredCodeLength = authCodeInfo.transform<number>(comp(pluck('type'), pluck('length')));
+export const countryCode = fromPromise(telegramAuth.countryCode);
 
 authState.transform(trace('authState: '));
 

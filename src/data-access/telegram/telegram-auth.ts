@@ -36,6 +36,10 @@ export default class TelegramAuth {
     })
   }
 
+  public get countryCode() {
+    return this.tdClient.send({ '@type': 'getCountryCode' });
+  }
+
   public sendTdLibParams() {
     this.tdClient.send({
       '@type': 'setTdlibParameters',

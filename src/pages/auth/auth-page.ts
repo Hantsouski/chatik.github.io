@@ -5,7 +5,7 @@ import { codeForm, phoneForm, qrCodeForm } from './components';
 
 const pageLayout = (specificForm: unknown) => (
   centerL(
-    { max: '40ch', andText: true },
+    { max: '40ch' },
     specificForm,
   )
 );
